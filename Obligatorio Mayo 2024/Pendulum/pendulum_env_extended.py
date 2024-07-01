@@ -1,4 +1,4 @@
-from gymnasium.envs.classic_control.pendulum import PendulumEnv
+from gym.envs.classic_control.pendulum import PendulumEnv
 
 class PendulumEnvExtended(PendulumEnv):
     def __init__(self, *args, **kwargs):
