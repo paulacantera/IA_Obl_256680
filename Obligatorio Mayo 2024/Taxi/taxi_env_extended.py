@@ -1,4 +1,4 @@
-from gymnasium.envs.toy_text.taxi import TaxiEnv
+from gym.envs.toy_text.taxi import TaxiEnv
 class TaxiEnvExtended(TaxiEnv):
     def __init__(self, render_mode="rgb_array", *args, **kwargs):
         super(TaxiEnvExtended, self).__init__(render_mode=render_mode, *args, **kwargs)
