@@ -13,7 +13,14 @@ class MinimaxAgent(Agent):
         return action
     
     def heuristic_utility(self, board: Board):
-        return board.grid.sum()
+        xor_sum = 0
+        for row in board.grid:
+            row_sum = 0
+            for cell in row:
+                if cell == 1:
+                    row_sum += 1
+            xor_sum ^= row_sum
+        return -xor_sum
     
     def minimax(self, board: Board, player, is_maximizing, depth):
         if board.is_end(player)[0] or depth == 0:
