@@ -1,6 +1,8 @@
 from agent import Agent
 from board import Board
 import math
+import numpy as np
+from itertools import groupby
 
 class MinimaxAgent(Agent):
     
@@ -13,14 +15,21 @@ class MinimaxAgent(Agent):
         return action
     
     def heuristic_utility(self, board: Board):
-        xor_sum = 0
-        for row in board.grid:
-            row_sum = 0
+        total_coins = board.grid.sum()
+        sequences = self.count_sequences(board.grid)
+        return -total_coins + sequences
+
+    def count_sequences(self, grid):
+        sequences = 0
+        for row in grid:
+            in_sequence = False
             for cell in row:
-                if cell == 1:
-                    row_sum += 1
-            xor_sum ^= row_sum
-        return -xor_sum
+                if cell == 1 and not in_sequence:
+                    sequences += 1
+                    in_sequence = True
+                elif cell == 0:
+                    in_sequence = False
+        return sequences
     
     def minimax(self, board: Board, player, is_maximizing, depth):
         if board.is_end(player)[0] or depth == 0:
