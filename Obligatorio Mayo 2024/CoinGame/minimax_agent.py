@@ -6,9 +6,11 @@ from itertools import groupby
 
 class MinimaxAgent(Agent):
     
-    def __init__(self, player=1, max_depth=3):
+    def __init__(self, player=1, max_depth=3, a=1,b=1):
         super().__init__(player)
         self.max_depth = max_depth
+        self.a = a
+        self.b = b
         
     def next_action(self, obs):
         action, _ = self.minimax(obs, self.player, True, self.max_depth)
@@ -17,7 +19,7 @@ class MinimaxAgent(Agent):
     def heuristic_utility(self, board: Board):
         total_coins = board.grid.sum()
         sequences = self.count_sequences(board.grid)
-        return -total_coins + sequences
+        return self.a * total_coins + self.b * sequences
 
     def count_sequences(self, grid):
         sequences = 0

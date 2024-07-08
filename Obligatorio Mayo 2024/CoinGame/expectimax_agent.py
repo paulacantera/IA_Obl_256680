@@ -15,7 +15,7 @@ class ExpectimaxAgent(Agent):
     def heuristic_utility(self, board: Board):
         total_coins = board.grid.sum()
         sequences = self.count_sequences(board.grid)
-        return -total_coins + sequences
+        return total_coins + sequences
 
     def count_sequences(self, grid):
         sequences = 0
